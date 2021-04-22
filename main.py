@@ -19,7 +19,7 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
         self.grades_list = []
-
+        self.ave_grade = float
 
     def __str__(self):
         text = (f"Имя:{self.name}",
@@ -52,9 +52,11 @@ class Student:
 
 
     def average_grade(self):
-        sum(self.grades.values())/len(self.grades.keys())
-        return sum(self.grades.values())/len(self.grades.keys())
+        self.ave_grade = sum(self.grades.values())/len(self.grades.keys())
+        return self.ave_grade
 
+    def __eq__(self, other):
+        return self.ave_grade == other.ave_grade
 
 class Reviewer(Mentor):
 
@@ -81,7 +83,7 @@ class Lecturer(Mentor):
         self.surname = surname
         self.rate = []
         self.course_lect = []
-
+        self.ave_rate = float
     def __str__(self):
         text_lec = (f"Имя:{self.name}",
                   f" Фамилия:{self.surname}",
@@ -93,10 +95,11 @@ class Lecturer(Mentor):
         self.course_lect.append(course)
 
     def add_ave_rate(self):
-        return (sum(self.rate))/len(self.rate)
+        self.ave_rate = (sum(self.rate)) / len(self.rate)
+        return self.ave_rate
 
-    def __eq__(self,other):
-        return self.
+    def __eq__(self, other):
+        return self.ave_rate == other.ave_rate
 
 
 student_list = []
@@ -133,7 +136,8 @@ student1.rate_lect(lecturer2, "Трансфигурация", 10)
 student2.rate_lect(lecturer1, "Заклинания", 8)
 student2.rate_lect(lecturer2, "Трансфигурация", 10)
 
-
+lecturer1.__eq__(lecturer2)
+lecturer2.__eq__(lecturer1)
 reviewer1 = Reviewer('Альбус', 'Дамблдор')
 reviewer2 = Reviewer('Северус', 'Снегг')
 reviewer2.add_cour_attached('Зельеварение')
@@ -142,15 +146,18 @@ reviewer1.rate_hw(student1, "Защита от темных искусств", 1
 reviewer1.rate_hw(student2, "Защита от темных искусств", 9)
 reviewer2.rate_hw( student1, "Зельеварение", 6)
 reviewer2.rate_hw( student2, "Зельеварение", 7)
+student1.__eq__(student2)
+student2.__eq__(student1)
 
 
+print(lecturer1.__eq__(lecturer2))
+print(student1.__eq__(student2))
 
-
-#pprint(reviewer1.__str__())
-#pprint(reviewer2.__str__())
-#pprint(lecturer1.__str__())
-#pprint(lecturer2.__str__())
+pprint(reviewer1.__str__())
+pprint(reviewer2.__str__())
+pprint(lecturer1.__str__())
+pprint(lecturer2.__str__())
 
 
 pprint(student1.__str__())
-#pprint(student2.__str__())
+pprint(student2.__str__())
